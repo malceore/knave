@@ -1,0 +1,10 @@
+function area(){
+}
+
+area.prototype.getNewMonster = function() {
+
+};
+
+//	Possibly put all the monsters into a json file and just set up the 
+//new monsters stats in this file that way the loop doesn't have to change 
+//for new creatures.  

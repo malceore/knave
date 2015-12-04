@@ -1,0 +1,68 @@
+{"frames": {
+
+"Stig.png":
+{
+    "frame": {"x":0,"y":0,"w":13,"h":16},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":142,"h":34}
+},
+
+"Flameskull.png":
+{
+    "frame": {"x":24,"y":0,"w":16,"h":16},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":142,"h":34}
+},
+
+"Dingo.png":
+{
+    "frame": {"x":37,"y":0,"w":16,"h":16},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":142,"h":34}
+},
+
+"Fox.png":
+{
+    "frame": {"x":40,"y":0,"w":16,"h":16},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":142,"h":34}
+},
+
+"Snake.png":
+{
+    "frame": {"x":59,"y":0,"w":16,"h":16},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":142,"h":34}
+},
+
+"Pebble.png":
+{
+    "frame": {"x":77,"y":0,"w":16,"h":16},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":142,"h":34}
+}
+
+},
+
+"meta": {
+    "app": "http://www.texturepacker.com",
+    "version": "1.0",
+    "image": "res/monsters_2.png",
+    "format": "RGBA8888",
+    "size": {"w":148,"h":34},
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:2f213a6b451f9f5719773418dfe80ae8$"
+}
+}

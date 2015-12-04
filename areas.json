@@ -1,0 +1,6 @@
+{"areas":[
+
+	{"name":"dungeon1", "type":"dungeon", "doors":3, "prev":"NULL", "next":"dungeon2"},
+	{"name":"dungeon2", "type":"dungeon", "doors":5, "prev":"dungeon1", "next":"forest1"},
+	{"name":"forest1", "type":"forest", "doors":7, "prev":"dungeon2", next"NULL"}
+]}

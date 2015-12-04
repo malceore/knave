@@ -1,0 +1,25 @@
+function loader() {
+	this.file = "file";
+}
+
+
+
+loader.prototype.addImage = function(image){
+
+        return true;
+};
+
+
+loader..prototype.addJson = function(Json){
+  var loader = new PIXI.JsonLoader(Json));
+        loader.on('loaded', function(evt) {
+                //data is in evt.content.json
+                evt.content.json
+                //var alienFrames = ["squirm.png"];
+		return true;
+        });
+        loader.load();
+	console.log("Load successful");
+};
+
+

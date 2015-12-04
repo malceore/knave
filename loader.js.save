@@ -1,0 +1,11 @@
+function load(imag
+) {
+
+    var img = new Image();
+
+	img = ""
+	img.onload = function(){
+		return img;
+			
+	}
+}

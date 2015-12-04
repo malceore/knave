@@ -1,0 +1,122 @@
+{"frames": {
+
+"Human1_M.png":
+{
+    "frame": {"x":0,"y":0,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Human1_F.png":
+{
+    "frame": {"x":0,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Ogre_M.png":
+{
+    "frame": {"x":16,"y":0,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Ogre_F.png":
+{
+    "frame": {"x":16,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Dryad_M.png":
+{
+    "frame": {"x":32,"y":0,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Dryad_F.png":
+{
+    "frame": {"x":32,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Elf_M.png":
+{
+    "frame": {"x":48,"y":0,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Elf_F.png":
+{
+    "frame": {"x":48,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Fishman_M.png":
+{
+    "frame": {"x":64,"y":0,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Fishman_F.png":
+{
+    "frame": {"x":64,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Human2_M.png":
+{
+    "frame": {"x":80,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Human2_F.png":
+{
+    "frame": {"x":80,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+}
+
+},
+
+"meta": {
+    "app": "http://www.texturepacker.com",
+    "version": "1.0",
+    "image": "res/races.png",
+    "format": "RGBA8888",
+    "size": {"w":208,"h":68},
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:2f213a6b451f9f5719773418dfe80ae8$"
+}
+}

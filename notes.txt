@@ -1,0 +1,57 @@
+
+started at 6:11 - fivehundred in under twenty minutes
+
+ - - Upgrades - - 
+Print out all the buttons inside upgrades array, the array will hold names, cost and damage values for now.
+Upgrades will light up when they can be bought and when clicked will stop being clickable for now.
+Buying an upgrade will change current damage to be the weapons upgrade.
+
+
+
+
+
+==== redesign 2015, Knave =====
+Graphic = click space to do damage to monster
+button = section that upgrades damage when clicked.
+
+area.js class{
+ Linked List like (next, prev)
+ var name;
+ var type = (forest, dungeon, cave, town, etc) //Town is special instead of doors will be merchants and players.
+ var backgroundSprite //Basically a sprite of different areas floors)
+
+ Door Subclass 
+  var Sprite = (dictated by area type)
+  var behindDoor = (treasure int, monster monster object, loot placeholder)
+
+ Monster Subclass 
+  var Sprite
+  var name
+  var health
+  var gold reward
+}
+
+
+
+upgrades.js class{
+weapons? Levels? Think this out already.
+
+
+}
+
+
+
+
+
+
+neato :) \/
+alrighty so the levesl will all be alligory for the stages of life.
+-Endless Mines(Plentiful youth)
+-Castle of Confusion(young adult, schooling)
+-Atleantian Shores(Marriage)
+-Archiada Lair(Birth)
+-Forest Of Temptation(The lure of a free life)
+-
+-
+Then at the end you will walk up to the mad king who is waiting to 
+judge your life as a hero.
