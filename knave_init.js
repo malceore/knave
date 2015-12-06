@@ -1,4 +1,4 @@
-// Knave 1.0.9
+// Knave 1.2.1
 // Created by Brandon T. Wood on December 1st, 2013
 // Knave is meant to be a combination Incremental Game, combining
 //	the best aspects of all to make a fun browser based hybrid people
@@ -10,10 +10,11 @@
 //Init
 //Load
 //createChar
+//charClear
 //setup
 //-update
-//-monster.click
-//-check
+//-checkAttributes
+//-checkChest
 //-loadLevel
 
 
@@ -461,6 +462,10 @@ function setup(n, r, ge, go, l, t, a){
         critical_bar.drawRect(5,248,(10/100)*800,14)
         char_container.addChild(critical_bar);
 
+        //var bar = new PIXI.Graphics();
+	//bar.drawRect(5,248,(10/100)*800,14)
+	//stage.addChild(bar);
+
         var char_name = new PIXI.Text(n, {font:"bold 25px sans-serif", fill:"pink", align:"center"});
         char_name.position.x = 5;
         char_name.position.y = 0;
@@ -504,6 +509,9 @@ function setup(n, r, ge, go, l, t, a){
 	console.log("Setup successful!\nGame Start!");
 
 	// Starting stamina power bar fill and defill
+        var bar = new PIXI.Graphics();
+        bar.drawRect(5,248,(10/100)*800,14)
+        stage.addChild(bar);
 	setInterval(function() { bars() }, 2000)
 
 	// Kick the tires and lite the fires.
@@ -573,27 +581,18 @@ function setup(n, r, ge, go, l, t, a){
 		if(char_stamina < 10){
 
 			char_stamina++;
-                	critical_bar.beginFill(0x0099FF);
-                	critical_bar.drawRect(67,600,(char_stamina/100)*800,14)
-                	char_container.addChild(critical_bar);
-			
+
+			bar.beginFill(0x0099FF);
+			bar.drawRect(55,548,(char_stamina/100)*800,14);
 		}else{
+                        bar.beginFill(0x999966);
+			bar.drawRect(55,548,(char_stamina/100)*800,14);
 
 			console.log("	Crit hit!");
 			monsters[0].current_health = 0;
-
-			/*
-			Does a critical hit.
-			currentHealth = currentHealth - 10;
-	                bar.drawRect(215,580,(currentHealth/100)*800, 14);
-			*/
-
 			char_stamina = 0;
-			critical_bar.beginFill(0x999966);
-                        critical_bar.drawRect(67,600,(10/100)*800,14)
-                        char_container.addChild(critical_bar);
 		}
-		char_container.addChild(critical_bar);
+		stage.addChild(bar);
 	};
 
 

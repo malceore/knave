@@ -118,6 +118,7 @@ function Monsters(level_num){
         this.health = 5 + Math.floor(level_num * 1.15);
 	this.current_health = parseInt(this.health);
         this.name = "Firerat";
+	this.animated = false; // This is for damage animation.
 	//var XY = this.randomXY();
 	this.generateMonster(level_num);
 	//console.log("	Created a new " + this.name);
@@ -148,13 +149,26 @@ function Monsters(level_num){
 
         this.sprite.click = this.sprite.touchstart = function(e){
 
-		this.current_health = this.current_health - 3;
-	        this.bar.drawRect(215,475,(this.current_health/100)*800,14);
+		if(!this.animated){
 
-		//this.current_health = 0
-		//console.log(this.current_health);
-		//this.current_health = 0;
-        }.bind(this);
+			this.current_health = this.current_health - 3;
+		        this.bar.drawRect(215,475,(this.current_health/100)*800,14);
+
+			this.sprite.tint = 0xff0000;
+			//var tempFilter = new PIXI.ColorMatrixFilter();
+			//this.sprite.filters = [tempFilter];
+			this.animated = true;
+			setTimeout(this.sprite.click, 100);
+			//console.log("sleepoing");
+		}else{
+
+			//console.log("Doing it!");
+			//this.sprite.filters = null;
+			this.sprite.tint = 0xffffff;
+			this.animated = false;
+		}
+      	}.bind(this);	
+
 	// Don't know why this bind thing works, but fixes my scope issues.
 
 	this.randomXY();
