@@ -6,7 +6,7 @@ function area(name, bgSprite, type, doors, prev, next){
 	this.doors = doors;
 	this.prev = prev;
 	this.next = next;	
-	this.monster = new monster();
+	//this.monster = new monster();
 	this.door = new door(); 
 }
 
@@ -114,6 +114,7 @@ door.prototype.openDoor = function() {
 function Monsters(level_num){
 
 	// Randomly init some values
+	this.clickDamage = 0;
         this.gold = (1 + level_num) * 3;
         this.health = 5 + Math.floor(level_num * 1.15);
 	this.current_health = parseInt(this.health);
@@ -151,7 +152,9 @@ function Monsters(level_num){
 
 		if(!this.animated){
 
-			this.current_health = this.current_health - 3;
+			//this.current_health = this.current_health - 3;
+			console.log("	"+ this.clickDamage);
+			this.current_health = this.current_health - this.clickDamage;
 		        this.bar.drawRect(215,475,(this.current_health/100)*800,14);
 
 			this.sprite.tint = 0xff0000;
@@ -213,6 +216,7 @@ Monsters.prototype.generateMonster = function(level_num){
                 "Direrat",
 		"Snake",
 		"Snake",
+		"Groaf",
 		"Greenslime",
 		"Piggy",
 		"Piggy",
@@ -235,39 +239,6 @@ Monsters.prototype.generateMonster = function(level_num){
 }
 
 
-
-//Old monster is depreciated..
-// Is the basic object that holds information on ALL monsters that can be generated.
-function monster(){
-
-	this.gold;
-	this.health;
-	this.name;
-	this.sprite = "Flamemoth.png";
-	this.array = [
-
-		"Flamemoth",
-		"Rindslug",
-		"Direrat",
-		"Redslime",
-       	        "Oneye",
-       	        "Greenslime",
-       	        "Direrat",
-       	        "Groaf",
-		"Piggy",
-		"Fluffpuff"
-	];
-}
-
-// Returns a pseudo random monster from the list of them in the constructor.
-monster.prototype.getNewMonster = function() {
-	
-	var num = Math.floor((Math.random() * 10));
-	this.health = 6;
-	this.gold = 6;
-	this.name = this.array[num];
-	this.sprite = this.array[num] + ".png";
-}
 
 
 

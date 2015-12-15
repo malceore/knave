@@ -45,6 +45,8 @@ var doors;
 var chests = [];
 var TPText;
 var TPGold;
+var TPSin;
+var sin = 0;
 
 // Calls all the initial methods needed to setup, load and play the game.
 function init(){
@@ -90,14 +92,19 @@ function load(json){
 			// This means we already have a char saved in cookies and we call setup with what we got from cookies.
 			console.log("Char loaded, callings setup!");
 		        stage = new PIXI.Stage(0x50503E);
-        		renderer = PIXI.autoDetectRenderer(1040, 640);
-        		document.body.appendChild(renderer.view);
+        		renderer = PIXI.autoDetectRenderer(1040, 640, {view:document.getElementById("game")} );
+
+			//document.body.game.appendChild(renderer.view);
+        		//document.body.appendChild(renderer.view);
+
 			console.log("Calling setup!");
 			setup(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
 		}else if(ready == 0 && newChar == true){
 
 		        stage = new PIXI.Stage(0x50503E);
-		        renderer = PIXI.autoDetectRenderer(1028, 750);
+		        renderer = PIXI.autoDetectRenderer(1028, 750, {view:document.getElementById("game")} );
+
+			//document.body.game.appendChild(renderer.view);
         		document.body.appendChild(renderer.view);
 
 			// Means this person has a character to create. 
@@ -113,7 +120,7 @@ function load(json){
 function createChar(){
 
 	// A bad name, but really only a temporary array that will hold the player's choices and passed to setup.
-	var array = ["Keith", "Human1", "M", 0, 1, "null", "null"];
+	var array = ["Keith", "Human1", "M", 0, 0, 1, "null", "null"];
 			// n, r, ge, go, l, t, a
 
 	// The placeholder image that  
@@ -256,13 +263,13 @@ function clearChar(){
 // This function writes the cookie that stores your character. 
 function savedChar(){
 
-	document.cookie = array[0] + ',' + array[1] + ',' + array[2] + ',' + array[3] + ',' + array[4] + ',' + array[5] + ',' + array[6] + "; ";
+	document.cookie = array[0] + ',' + array[1] + ',' + array[2] + ',' + array[3] + ',' + array[4] + ',' + array[5] + ',' + array[6] + + ',' + array[7] + "; ";
 }
 
 
 //This function will construct everything in the game and start the loop when complete.
 // name, race, gender, gold, level, tier, attributes in array format.
-function setup(n, r, ge, go, l, t, a){
+function setup(n, r, ge, go, si, l, t, a){
 
 	// Top bar and gold information. 
         TPBar = new PIXI.Graphics();
@@ -274,7 +281,7 @@ function setup(n, r, ge, go, l, t, a){
 
 	// Top bar gold words.
 	TPGold = new PIXI.Text("0 GP", {font:"35px Arial", fill:"yellow"});
-	TPGold.position.x = 250;
+	TPGold.position.x = 100;
 	TPGold.position.y = 12;
 	stage.addChild(TPGold);
 
@@ -284,7 +291,13 @@ function setup(n, r, ge, go, l, t, a){
         TPText.position.y = 20;
         stage.addChild(TPText);
 
+	TPSin = new PIXI.Text("0 SIN", {font:"35px Arial", fill:"white"});
+        TPSin.position.x = 400;
+        TPSin.position.y = 12;
+        stage.addChild(TPSin);
+
 	addGold(parseInt(go));
+	addSin(parseInt(si));
 	//document.getElementById("demo").innerHTML = gold + " GP";
 
 	// Setting up upgrades, this means printing out each attribute button.
@@ -319,44 +332,45 @@ function setup(n, r, ge, go, l, t, a){
 	upgradeButtons[0].click = upgradeButtons[0].touchstart = function(e){
 
 		addGold(-1 * upgrades.attributes[0].cost);
-		upgrades.attributes[0].cost *= 2;
+		upgrades.attributes[0].cost = Math.round(upgrades.attributes[0].cost * 1.15) + 1;;
 		upgrades.attributes[0].level += 1;
 		upgradeNames[0].setText(upgrades.attributes[0].name + "     " + upgrades.attributes[0].level + " LVL     " + upgrades.attributes[0].cost + "GP");
-		//document.getElementById("demo").innerHTML = gold + " GP";
 	};
         upgradeButtons[1].click = upgradeButtons[1].touchstart = function(e){
 
-                //gold = gold - upgrades.attributes[1].cost;
                 addGold(-1 * upgrades.attributes[1].cost);
-                upgrades.attributes[1].cost *= 2;
+                upgrades.attributes[1].cost = Math.round(upgrades.attributes[1].cost * 1.15) + 1;
                 upgrades.attributes[1].level += 1;
                 upgradeNames[1].setText(upgrades.attributes[1].name + "     " + upgrades.attributes[1].level + " LVL     " + upgrades.attributes[1].cost + "GP");
-                //document.getElementById("demo").innerHTML = gold + " GP";
         };
         upgradeButtons[2].click = upgradeButtons[2].touchstart = function(e){
 
                 addGold(-1 * upgrades.attributes[2].cost);
-                upgrades.attributes[2].cost *= 2;
+                upgrades.attributes[2].cost = Math.round(upgrades.attributes[2].cost * 1.15) + 1;
                 upgrades.attributes[2].level += 1;
                 upgradeNames[2].setText(upgrades.attributes[2].name + "     " + upgrades.attributes[2].level + " LVL     " + upgrades.attributes[2].cost + "GP");
-                //document.getElementById("demo").innerHTML = gold + " GP";
         };
         upgradeButtons[3].click = upgradeButtons[3].touchstart = function(e){
 
                 addGold(-1 * upgrades.attributes[3].cost);
-                upgrades.attributes[3].cost *= 2;
+                upgrades.attributes[3].cost = Math.round(upgrades.attributes[3].cost * 1.15) + 1;
                 upgrades.attributes[3].level += 1;
                 upgradeNames[3].setText(upgrades.attributes[3].name + "     " + upgrades.attributes[3].level + " LVL     " + upgrades.attributes[3].cost + "GP");
-                //document.getElementById("demo").innerHTML = gold + " GP";
         };
-        /*upgradeButtons[4].click = upgradeButtons[4].touchstart = function(e){
+        upgradeButtons[4].click = upgradeButtons[4].touchstart = function(e){
 
                 addGold(-1 * upgrades.attributes[4].cost);
-                upgrades.attributes[4].cost *= 2;
+                upgrades.attributes[4].cost = Math.round(upgrades.attributes[4].cost * 1.15) + 1;
                 upgrades.attributes[4].level += 1;
-                upgradeNames[4].setText(upgrades.attributes[4].name + "       " + upgrades.attributes[4].level + " LVL     " + upgrades.attributes[4].cost + "GP$
-                //document.getElementById("demo").innerHTML = gold + " GP";
-        };*/
+                upgradeNames[4].setText(upgrades.attributes[4].name + "       " + upgrades.attributes[4].level + " LVL     " + upgrades.attributes[4].cost + "GP" );
+        };
+        upgradeButtons[5].click = upgradeButtons[5].touchstart = function(e){
+
+                addGold(-1 * upgrades.attributes[5].cost);
+                upgrades.attributes[5].cost = Math.round(upgrades.attributes[5].cost * 1.15) + 1;
+                upgrades.attributes[5].level += 1;
+                upgradeNames[5].setText(upgrades.attributes[5].name + "       " + upgrades.attributes[5].level + " LVL     " + upgrades.attributes[5].cost + "GP");
+        };
 
 
 //TEMP 
@@ -384,7 +398,6 @@ function setup(n, r, ge, go, l, t, a){
         ];
 
 //
-
 	// Setting up 'loot chests' and level loading.
 	//	Need to replace DOOR with CHEST for all.
 	console.log("Loading level 1!");
@@ -512,7 +525,8 @@ function setup(n, r, ge, go, l, t, a){
         var bar = new PIXI.Graphics();
         bar.drawRect(5,248,(10/100)*800,14)
         stage.addChild(bar);
-	setInterval(function() { bars() }, 2000)
+	//setInterval(function() { bars() }, 2000)
+	bars(2003 - (upgrades.attributes[3].level * 3))
 
 	// Kick the tires and lite the fires.
 	update();
@@ -551,31 +565,34 @@ function setup(n, r, ge, go, l, t, a){
 	}
 
 
-	// Simple function
+	// Simple function increases number of gold pieces
 	function addGold(value){
 
-		//console.log(" Current gold:" + gold + " Additional value:" + value + " = new value:" + (gold + value));
 		gold = gold + value;
 		TPGold.setText("" + gold + " GP");
-                //document.getElementById("demo").innerHTML = gold + " GP";
-
 		saveChar(n, r, ge, go, l, t, a);
-		//checkAttributes();
-		//checkChests();
 	}
+        // Simple function increases number of sins
+        function addSin(value){
+
+		//console.log(" sin:" + sin);
+                sin = sin + value;
+                TPSin.setText("" + sin + " SIN");
+                saveChar(n, r, ge, go, l, t, a);
+        }
 
 
 	// This function writes the cookie that stores your character.
 	function saveChar(na, re, gen, gol, le, ti, at){ 
 
 		//console.log("" + na + ',' + re + ',' + gen + ',' + gold + ',' + le + ',' + ti + ',' + at);
-	        document.cookie = na + ',' + re + ',' + gen + ',' + gold + ',' + le + ',' + ti + ',' + at + ";expires=Thu, 01 Jan 2020 00:00:00 UTC";
+	        document.cookie = na + ',' + re + ',' + gen + ',' + gold + "," + sin + ',' + le + ',' + ti + ',' + at + ";expires=Thu, 01 Jan 2020 00:00:00 UTC";
 	}
 
 
 
 	// This function controls the stamina bars regen and roll over
-	function bars(){
+	function bars(value){
 
 		var critical_bar = new PIXI.Graphics();
 		if(char_stamina < 10){
@@ -588,11 +605,16 @@ function setup(n, r, ge, go, l, t, a){
                         bar.beginFill(0x999966);
 			bar.drawRect(55,548,(char_stamina/100)*800,14);
 
-			console.log("	Crit hit!");
-			monsters[0].current_health = 0;
+			//console.log("	Crit hit!");
+			//console.log("	" + upgrades.attributes[0].level * 3);
+			monsters[0].current_health = monsters[0].current_health - (upgrades.attributes[0].level * 3);
 			char_stamina = 0;
 		}
 		stage.addChild(bar);
+
+		//console.log("	waiting in bar for " + value);
+		//setTimeout(bars(2000), 2000)
+		setTimeout(function(){ bars(2000 - (upgrades.attributes[3].level * 3)) }, value)
 	};
 
 
@@ -600,7 +622,8 @@ function setup(n, r, ge, go, l, t, a){
 	// Makes sure that you can buy what you buy, and nothing else.
 	function checkAttributes(){
 
-		for(var i = 0; i < 4; i++){
+		//console.log("	" + upgrades.attributes[0].level);
+		for(var i = 0; i < 6; i++){
 			if(gold >= parseInt(upgrades.attributes[i].cost)){
 
 				//console.log("You can buy something!");
@@ -621,10 +644,13 @@ function setup(n, r, ge, go, l, t, a){
 	// Checks to see if a monster has been killed, if so remove it and select a new one for that place in the array.
 	function checkMonsters(){
 		for(var i = 0; i < monsters.length; i++){
+			monsters[i].clickDamage = upgrades.attributes[1].level;
 			if(monsters[i].current_health <= 0){
 
-				//console.log("You killed a " + monsters[i].name);
-				addGold(monsters[i].gold);
+				addGold( monsters[i].gold + (2 * upgrades.attributes[2].level) - 2);
+
+				addSin(upgrades.attributes[4].level);
+
 				stage.removeChild(monsters[i].monsterContainer);
 				monsters[i] = new Monsters(INDEX);
 				for(var j = 0; j < monsters.length; j++){
