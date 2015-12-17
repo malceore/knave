@@ -92,7 +92,7 @@
 
 "Human2_M.png":
 {
-    "frame": {"x":80,"y":33,"w":16,"h":32},
+    "frame": {"x":80,"y":0,"w":16,"h":32},
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
@@ -106,7 +106,117 @@
     "trimmed": false,
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
     "sourceSize": {"w":64,"h":16}
+},
+
+"Arachni_M.png":
+{
+    "frame": {"x":96,"y":0,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Arachni_F.png":
+{
+    "frame": {"x":96,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Centaur_M.png":
+{
+    "frame": {"x":118,"y":0,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Centaur_F.png":
+{
+    "frame": {"x":118,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Naga_M.png":
+{
+    "frame": {"x":136,"y":0,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Naga_F.png":
+{
+    "frame": {"x":136,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Lycan_M.png":
+{
+    "frame": {"x":154,"y":0,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Lycan_F.png":
+{
+    "frame": {"x":154,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Manitaur_M.png":
+{
+    "frame": {"x":170,"y":0,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Manitaur_F.png":
+{
+    "frame": {"x":170,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Tengu_M.png":
+{
+    "frame": {"x":186,"y":0,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
+},
+
+"Tengu_F.png":
+{
+    "frame": {"x":186,"y":33,"w":16,"h":32},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":64,"h":16}
 }
+
+
 
 },
 

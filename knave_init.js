@@ -208,7 +208,7 @@ function createChar(){
 	raceButton.click = raceButton.touchstart = function(e){
 
 		//Race arrays
-		var races = ["Human1", "Ogre", "Dryad", "Elf", "Fishman", "Human2"];		
+		var races = ["Human1", "Ogre", "Dryad", "Elf", "Fishman", "Human2", "Arachni", "Centaur", "Naga", "Lycan", "Manitaur", "Tengu"];		
 		if(temp >= races.length-1){
 
 			temp = 0;
@@ -251,6 +251,19 @@ function createChar(){
 		//console.log(document.cookie);
                 setup(array[0], array[1], array[2], array[3], array[4], array[5], array[6], array[7], array[8], array[9], array[10], array[11], array[12]);
         };
+
+	// Print out title and race descriptions.
+	var titleText = new PIXI.Text("Welcome to Knave ");
+	titleText.setStyle({font:"bold 60px Arial", fill:"yellow"});
+        titleText.position.x = 40;
+        titleText.position.y = 50;
+	stage.addChild(titleText);
+
+	var tutorialText = new PIXI.Text("Click or Tap to attack monsters,\n then on chests to collect even\n more gold and finally spend\n your gold on upgrading your\n attributes. The arrow sign will\n take you to the next level\n when you are ready.");
+        tutorialText.setStyle({font:"bold 32px Arial", fill:"black"});
+        tutorialText.position.x = 40;
+        tutorialText.position.y = 120;
+	stage.addChild(tutorialText);
 
         renderer.render(stage);
 }
@@ -722,7 +735,7 @@ function setup(n, r, ge, go, si, l, t, at0, at1, at2, at3, at4, at5){
 		console.log("	" + newLevel + " " + currentArea.name);
 
 		// Gotta reset those chests, jsut gonna make new ones for now, will 'reset' them later.
- 	        for(var i = 0; i < 4; i++){
+ 	        for(var i = 0; i < 5; i++){
 
  	               chests[i] = new chest(INDEX, i);
 	               chests[i].sprite.position.x = 670; //20 + (90 * i);
