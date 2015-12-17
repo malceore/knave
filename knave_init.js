@@ -1,4 +1,4 @@
-// Knave 1.2.1
+// Knave 1.2.9
 // Created by Brandon T. Wood on December 1st, 2013
 // Knave is meant to be a combination Incremental Game, combining
 //	the best aspects of all to make a fun browser based hybrid people
@@ -98,7 +98,7 @@ function load(json){
         		//document.body.appendChild(renderer.view);
 
 			console.log("Calling setup!");
-			setup(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
+			setup(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8], temp[9], temp[10], temp[11], temp[12]);
 		}else if(ready == 0 && newChar == true){
 
 		        stage = new PIXI.Stage(0x50503E);
@@ -120,8 +120,8 @@ function load(json){
 function createChar(){
 
 	// A bad name, but really only a temporary array that will hold the player's choices and passed to setup.
-	var array = ["Keith", "Human1", "M", 0, 0, 1, "null", "null"];
-			// n, r, ge, go, l, t, a
+	var array = ["Keith", "Human1", "M", 0, 0, 0, 0, 1, 1, 1, 1, 1, 1];
+			// n, r, ge, go, si, l, t, ats 
 
 	// The placeholder image that  
 	var tempTex = PIXI.Texture.fromImage("Human1_M.png");
@@ -247,9 +247,9 @@ function createChar(){
                 stage.removeChild(raceText);
                 stage.removeChild(doneButton);
                 stage.removeChild(doneText);
-		document.cookie = array[0] + ',' + array[1] + ',' + array[2] + ',' + array[3] + ',' + array[4] + ',' + array[5] + ',' + array[6] + "; expires=Thu, 01 Jan 2020 00:00:00 UTC";
+		document.cookie = array[0] + ',' + array[1] + ',' + array[2] + ',' + array[3] + ',' + array[4] + ',' + array[5] + ',' + array[6] + ',' + array[7] + "; expires=Thu, 01 Jan 2020 00:00:00 UTC";
 		//console.log(document.cookie);
-                setup(array[0], array[1], array[2], array[3], array[4], array[5], array[6]);
+                setup(array[0], array[1], array[2], array[3], array[4], array[5], array[6], array[7], array[8], array[9], array[10], array[11], array[12]);
         };
 
         renderer.render(stage);
@@ -260,17 +260,12 @@ function clearChar(){
 	document.cookie = ";expires=Thu, 01 Jan 2020 00:00:00 UTC";
 }
 
-// This function writes the cookie that stores your character. 
-function savedChar(){
-
-	document.cookie = array[0] + ',' + array[1] + ',' + array[2] + ',' + array[3] + ',' + array[4] + ',' + array[5] + ',' + array[6] + + ',' + array[7] + "; ";
-}
-
 
 //This function will construct everything in the game and start the loop when complete.
-// name, race, gender, gold, level, tier, attributes in array format.
-function setup(n, r, ge, go, si, l, t, a){
+// name, race, gender, gold, sin, level, tier, attributes 0-5 (6).
+function setup(n, r, ge, go, si, l, t, at0, at1, at2, at3, at4, at5){
 
+	at = [at0,at1,at2,at3,at4,at5]
 	// Top bar and gold information. 
         TPBar = new PIXI.Graphics();
         TPBar.beginFill(0x757585);
@@ -296,10 +291,6 @@ function setup(n, r, ge, go, si, l, t, a){
         TPSin.position.y = 12;
         stage.addChild(TPSin);
 
-	addGold(parseInt(go));
-	addSin(parseInt(si));
-	//document.getElementById("demo").innerHTML = gold + " GP";
-
 	// Setting up upgrades, this means printing out each attribute button.
         upgrades = new upgrade();	
 	var upgradeButtons = [];
@@ -307,6 +298,10 @@ function setup(n, r, ge, go, si, l, t, a){
 
 	// Loop for printing purchasable upgrades to attributes.
 	for(var i = 0; i < 6; i++){
+
+		//Init levels
+		upgrades.attributes[i].level = parseInt(at[i]); 
+		upgrades.attributes[i].cost = Math.round(parseInt(at[i]) * 1.15) + 1;
 
 		//console.log(i);
 		upgradeButtons[i] = new PIXI.Graphics();
@@ -326,13 +321,12 @@ function setup(n, r, ge, go, si, l, t, a){
  	      	upgradeNames[i].position.x = 790;
         	upgradeNames[i].position.y = 60 * i + 85;
 		stage.addChild(upgradeNames[i]);		
-
 	};
 	// List of each attribute's individual click function.
 	upgradeButtons[0].click = upgradeButtons[0].touchstart = function(e){
 
 		addGold(-1 * upgrades.attributes[0].cost);
-		upgrades.attributes[0].cost = Math.round(upgrades.attributes[0].cost * 1.15) + 1;;
+		upgrades.attributes[0].cost = Math.round(upgrades.attributes[0].cost * 1.15) + 1;
 		upgrades.attributes[0].level += 1;
 		upgradeNames[0].setText(upgrades.attributes[0].name + "     " + upgrades.attributes[0].level + " LVL     " + upgrades.attributes[0].cost + "GP");
 	};
@@ -398,13 +392,19 @@ function setup(n, r, ge, go, si, l, t, a){
         ];
 
 //
+	// Initializing gold and sin.
+        addGold(parseInt(go));
+        addSin(parseInt(si));
+	// Initializing level
+	INDEX = parseInt(l);
+
 	// Setting up 'loot chests' and level loading.
 	//	Need to replace DOOR with CHEST for all.
 	console.log("Loading level 1!");
 	currentArea = new area(map[INDEX].name, texture, map[INDEX].type, map[INDEX].doors, map[INDEX].prev, map[INDEX].next);
 
 	// New chests area!
-	for(var i = 0; i < 4; i++){
+	for(var i = 0; i < 5; i++){
 
 		chests[i] = new chest(INDEX, i);
                 chests[i].sprite.position.x = 670; //20 + (90 * i);
@@ -475,10 +475,6 @@ function setup(n, r, ge, go, si, l, t, a){
         critical_bar.drawRect(5,248,(10/100)*800,14)
         char_container.addChild(critical_bar);
 
-        //var bar = new PIXI.Graphics();
-	//bar.drawRect(5,248,(10/100)*800,14)
-	//stage.addChild(bar);
-
         var char_name = new PIXI.Text(n, {font:"bold 25px sans-serif", fill:"pink", align:"center"});
         char_name.position.x = 5;
         char_name.position.y = 0;
@@ -535,7 +531,7 @@ function setup(n, r, ge, go, si, l, t, a){
 	function update(){
 
 		// Checks if upgrades are purchasable, monsters are dead or chests unlocked.
-		checkAttributes();
+		//checkAttributes();
 		checkMonsters();
 		checkChests();
 
@@ -570,7 +566,9 @@ function setup(n, r, ge, go, si, l, t, a){
 
 		gold = gold + value;
 		TPGold.setText("" + gold + " GP");
-		saveChar(n, r, ge, go, l, t, a);
+		//saveChar(n, r, ge, gold, sin, l, t, at);
+		checkAttributes();
+		//checkChests();
 	}
         // Simple function increases number of sins
         function addSin(value){
@@ -578,15 +576,32 @@ function setup(n, r, ge, go, si, l, t, a){
 		//console.log(" sin:" + sin);
                 sin = sin + value;
                 TPSin.setText("" + sin + " SIN");
-                saveChar(n, r, ge, go, l, t, a);
+                saveChar(n, r, ge, gold, sin, l, t, at);
         }
 
 
 	// This function writes the cookie that stores your character.
-	function saveChar(na, re, gen, gol, le, ti, at){ 
+	function saveChar(na, re, gen, gol, sin, le, ti, at){ 
 
-		//console.log("" + na + ',' + re + ',' + gen + ',' + gold + ',' + le + ',' + ti + ',' + at);
-	        document.cookie = na + ',' + re + ',' + gen + ',' + gold + "," + sin + ',' + le + ',' + ti + ',' + at + ";expires=Thu, 01 Jan 2020 00:00:00 UTC";
+		/*console.log( "" +
+
+			na + ',' + re + ',' + gen + ',' + gold + "," + sin + ',' + INDEX + ',' + ti + ',' 
+                	+ upgrades.attributes[5].level + ","  
+                	+ upgrades.attributes[4].level + ","
+                	+ upgrades.attributes[3].level + ","
+                	+ upgrades.attributes[2].level + ","
+                	+ upgrades.attributes[1].level + ","
+                	+ upgrades.attributes[0].level + ""
+		);*/
+
+	        document.cookie = na + ',' + re + ',' + gen + ',' + gold + "," + sin + ',' + INDEX + ',' + ti + ',' 
+			+ upgrades.attributes[5].level + ","  
+	                + upgrades.attributes[4].level + ","
+	                + upgrades.attributes[3].level + ","
+	                + upgrades.attributes[2].level + ","
+        	        + upgrades.attributes[1].level + ","
+                	+ upgrades.attributes[0].level + ""	
+		+ ";expires=Thu, 01 Jan 2020 00:00:00 UTC";
 	}
 
 
@@ -644,13 +659,12 @@ function setup(n, r, ge, go, si, l, t, a){
 	// Checks to see if a monster has been killed, if so remove it and select a new one for that place in the array.
 	function checkMonsters(){
 		for(var i = 0; i < monsters.length; i++){
+
 			monsters[i].clickDamage = upgrades.attributes[1].level;
 			if(monsters[i].current_health <= 0){
 
-				addGold( monsters[i].gold + (2 * upgrades.attributes[2].level) - 2);
-
-				addSin(upgrades.attributes[4].level);
-
+				addGold( parseInt( monsters[i].gold + (2 * upgrades.attributes[2].level) - 2));
+				addSin(parseInt(upgrades.attributes[4].level));
 				stage.removeChild(monsters[i].monsterContainer);
 				monsters[i] = new Monsters(INDEX);
 				for(var j = 0; j < monsters.length; j++){
@@ -686,7 +700,7 @@ function setup(n, r, ge, go, si, l, t, a){
 				chests[i].gold = 0;
 			}
 		}
-		if(kills > 5){
+		if(kills > INDEX + 4){
 
 			doorOut.interactive = true;
 			doorOut.tint = 0xFFFFFF;

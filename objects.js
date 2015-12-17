@@ -153,7 +153,7 @@ function Monsters(level_num){
 		if(!this.animated){
 
 			//this.current_health = this.current_health - 3;
-			console.log("	"+ this.clickDamage);
+			//console.log("	"+ this.clickDamage);
 			this.current_health = this.current_health - this.clickDamage;
 		        this.bar.drawRect(215,475,(this.current_health/100)*800,14);
 
