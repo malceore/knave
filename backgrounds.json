@@ -106,7 +106,72 @@
     "trimmed": false,
     "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
     "sourceSize": {"w":880,"h":71}
+},
+
+"Level_13.png":
+{
+    "frame": {"x":494,"y":0,"w":71,"h":71},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":880,"h":71}
+},
+
+"Level_14.png":
+{
+    "frame": {"x":540,"y":0,"w":71,"h":71},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":880,"h":71}
+},
+
+"Level_15.png":
+{
+    "frame": {"x":596,"y":0,"w":71,"h":71},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":880,"h":71}
+},
+
+"Level_16.png":
+{
+    "frame": {"x":642,"y":0,"w":71,"h":71},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":880,"h":71}
+},
+
+"Level_17.png":
+{
+    "frame": {"x":688,"y":0,"w":71,"h":71},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":880,"h":71}
+},
+
+"Level_18.png":
+{
+    "frame": {"x":734,"y":0,"w":71,"h":71},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":880,"h":71}
+},
+
+"Level_19.png":
+{
+    "frame": {"x":780,"y":0,"w":71,"h":71},
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+    "sourceSize": {"w":880,"h":71}
 }
+
+
 
 },
 

@@ -88,21 +88,18 @@ function load(json){
                	evt.content.json
                	console.log("Load Successful!");
 		if(ready == 0 && newChar == false){
-
+ 
 			// This means we already have a char saved in cookies and we call setup with what we got from cookies.
 			console.log("Char loaded, callings setup!");
 		        stage = new PIXI.Stage(0x50503E);
-        		renderer = PIXI.autoDetectRenderer(1040, 640, {view:document.getElementById("game")} );
-
-			//document.body.game.appendChild(renderer.view);
-        		//document.body.appendChild(renderer.view);
+        		renderer = PIXI.autoDetectRenderer(1024, 612, {view:document.getElementById("game")} );
 
 			console.log("Calling setup!");
 			setup(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8], temp[9], temp[10], temp[11], temp[12]);
 		}else if(ready == 0 && newChar == true){
 
 		        stage = new PIXI.Stage(0x50503E);
-		        renderer = PIXI.autoDetectRenderer(1028, 750, {view:document.getElementById("game")} );
+		        renderer = PIXI.autoDetectRenderer(1024, 612, {view:document.getElementById("game")} );
 
 			//document.body.game.appendChild(renderer.view);
         		document.body.appendChild(renderer.view);
@@ -247,6 +244,8 @@ function createChar(){
                 stage.removeChild(raceText);
                 stage.removeChild(doneButton);
                 stage.removeChild(doneText);
+		stage.removeChild(titleText);
+		stage.removeChild(tutorialText);
 		document.cookie = array[0] + ',' + array[1] + ',' + array[2] + ',' + array[3] + ',' + array[4] + ',' + array[5] + ',' + array[6] + ',' + array[7] + "; expires=Thu, 01 Jan 2020 00:00:00 UTC";
 		//console.log(document.cookie);
                 setup(array[0], array[1], array[2], array[3], array[4], array[5], array[6], array[7], array[8], array[9], array[10], array[11], array[12]);
@@ -401,7 +400,15 @@ function setup(n, r, ge, go, si, l, t, at0, at1, at2, at3, at4, at5){
                 {"name":"Level_9", "type":"dungeon", "doors":5, "prev":"Level_8", next:"Level_10"},
                 {"name":"Level_10", "type":"dungeon", "doors":4, "prev":"Level_9", "next":"Level_11"},
                 {"name":"Level_11", "type":"dungeon", "doors":4, "prev":"Level_10", "next":"Level_12"},
-                {"name":"Level_12", "type":"dungeon", "doors":4, "prev":"Level_11", "next":"NULL"},
+                {"name":"Level_12", "type":"dungeon", "doors":4, "prev":"Level_11", "next":"Level_13"},
+                {"name":"Level_13", "type":"dungeon", "doors":4, "prev":"Level_12", "next":"Level_14"},
+                {"name":"Level_14", "type":"dungeon", "doors":4, "prev":"Level_13", "next":"Level_15"},
+                {"name":"Level_15", "type":"dungeon", "doors":5, "prev":"Level_14", next:"Level_16"},
+                {"name":"Level_16", "type":"dungeon", "doors":4, "prev":"Level_15", "next":"Level_17"},
+                {"name":"Level_17", "type":"dungeon", "doors":4, "prev":"Level_16", "next":"Level_18"},
+                {"name":"Level_18", "type":"dungeon", "doors":4, "prev":"Level_17", "next":"Level_19"},
+                {"name":"Level_19", "type":"dungeon", "doors":4, "prev":"Level_18", "next":"Level_20"},
+                {"name":"Level_20", "type":"dungeon", "doors":4, "prev":"Level_19", "next":"Level_NULL"},
         ];
 
 //
@@ -535,10 +542,11 @@ function setup(n, r, ge, go, si, l, t, at0, at1, at2, at3, at4, at5){
         bar.drawRect(5,248,(10/100)*800,14)
         stage.addChild(bar);
 	//setInterval(function() { bars() }, 2000)
-	bars(2003 - (upgrades.attributes[3].level * 3))
+	bars(2003 - (upgrades.attributes[3].level * 3));
 
-	// Kick the tires and lite the fires.
-	update();
+	// Kick the tires and lite the fires. 1000 = a second and 30 = frames per.
+	//update();
+	setInterval(update(), 1000/30);
 
 	// Main Game loop.
 	function update(){
@@ -676,7 +684,7 @@ function setup(n, r, ge, go, si, l, t, at0, at1, at2, at3, at4, at5){
 			monsters[i].clickDamage = upgrades.attributes[1].level;
 			if(monsters[i].current_health <= 0){
 
-				addGold( parseInt( monsters[i].gold + (2 * upgrades.attributes[2].level) - 2));
+				addGold( parseInt( (monsters[i].gold + upgrades.attributes[2].level)) );
 				addSin(parseInt(upgrades.attributes[4].level));
 				stage.removeChild(monsters[i].monsterContainer);
 				monsters[i] = new Monsters(INDEX);

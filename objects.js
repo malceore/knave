@@ -115,7 +115,7 @@ function Monsters(level_num){
 
 	// Randomly init some values
 	this.clickDamage = 0;
-        this.gold = (1 + level_num) * 3;
+        this.gold = 1 + level_num;
         this.health = 5 + Math.floor(level_num * 1.15);
 	this.current_health = parseInt(this.health);
         this.name = "Firerat";
@@ -140,13 +140,19 @@ function Monsters(level_num){
         this.name_text.position.y = 340;
         this.monsterContainer.addChild(this.name_text);
 
-        // Creating Monster's Health Bar
-        this.bar = new PIXI.Graphics();
-        this.bar.beginFill(0xCC0000);
-        this.bar.lineStyle(8, 0x999966, 1);
-        this.bar.drawRect(215,475,( this.current_health/100)*800,14);
+	// New monster ratio bar.
+        this.health_text = new PIXI.Text(this.current_health +"/" + this.health, {font:"bold 21px sans-serif", fill:"#CC0000", align:"center"});
+        this.health_text.position.x = 220;
+        this.health_text.position.y = 451;
+        this.monsterContainer.addChild(this.health_text);
+
+// DEPRECIATED FOOLS Creating Monster's Health Bar
+        //this.bar = new PIXI.Graphics();
+        //this.bar.beginFill(0xCC0000);
+        //this.bar.lineStyle(8, 0x999966, 1);
+        //this.bar.drawRect(215,475,( this.current_health/100)*800,14);
 	//console.log("	" + this.health + " " + this.current_health);
-        this.monsterContainer.addChild(this.bar);
+        //this.monsterContainer.addChild(this.bar);
 
         this.sprite.click = this.sprite.touchstart = function(e){
 
@@ -155,7 +161,9 @@ function Monsters(level_num){
 			//this.current_health = this.current_health - 3;
 			//console.log("	"+ this.clickDamage);
 			this.current_health = this.current_health - this.clickDamage;
-		        this.bar.drawRect(215,475,(this.current_health/100)*800,14);
+			this.health_text.setText(this.current_health + "/" + this.health);
+
+		        //this.bar.drawRect(215,475,(this.current_health/100)*800,14);
 
 			this.sprite.tint = 0xff0000;
 			//var tempFilter = new PIXI.ColorMatrixFilter();
