@@ -1,4 +1,4 @@
-// Knave 1.3.2
+// Knave 1.2.9
 // Created by Brandon T. Wood on December 1st, 2013
 // Knave is meant to be a combination Incremental Game, combining
 //	the best aspects of all to make a fun browser based hybrid people
@@ -92,14 +92,14 @@ function load(json){
 			// This means we already have a char saved in cookies and we call setup with what we got from cookies.
 			console.log("Char loaded, callings setup!");
 		        stage = new PIXI.Stage(0x50503E);
-        		renderer = PIXI.autoDetectRenderer(1024, 570, {view:document.getElementById("game")} );
+        		renderer = PIXI.autoDetectRenderer(1024, 612, {view:document.getElementById("game")} );
 
 			console.log("Calling setup!");
 			setup(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8], temp[9], temp[10], temp[11], temp[12]);
 		}else if(ready == 0 && newChar == true){
 
 		        stage = new PIXI.Stage(0x50503E);
-		        renderer = PIXI.autoDetectRenderer(1024, 570, {view:document.getElementById("game")} );
+		        renderer = PIXI.autoDetectRenderer(1024, 612, {view:document.getElementById("game")} );
 
 			//document.body.game.appendChild(renderer.view);
         		document.body.appendChild(renderer.view);
@@ -275,14 +275,14 @@ function clearChar(){
 
 //This function will construct everything in the game and start the loop when complete.
 // name, race, gender, gold, sin, level, tier, attributes 0-5 (6).
-function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
+function setup(n, r, ge, go, si, l, t, at0, at1, at2, at3, at4, at5){
 
 	at = [at0,at1,at2,at3,at4,at5]
 	// Top bar and gold information. 
         TPBar = new PIXI.Graphics();
         TPBar.beginFill(0x757585);
         //topbar.lineStyle(5, 0xACACB6, 1);
-        TPBar.drawRect(0, 0, 1250, 40);
+        TPBar.drawRect(20, 5, 1250, 40);
         TPBar.endFill();
 	stage.addChild(TPBar);
 
@@ -319,7 +319,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 		upgradeButtons[i] = new PIXI.Graphics();
 	        upgradeButtons[i].beginFill(0x757585);
 	        //upgradeButtons[i].lineStyle(5, 0xACACB6, 1);
-                upgradeButtons[i].drawRect(745, 58 * i + 50, 270, 50);
+                upgradeButtons[i].drawRect(775, 60 * i + 65, 258, 50);
         	upgradeButtons[i].endFill();
 
                 //Tint starts on spawn to let you know you can't open this door yet.
@@ -330,8 +330,8 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 		stage.addChild(upgradeButtons[i]);
 
 		upgradeNames[i] = new PIXI.Text(upgrades.attributes[i].name + "     " + upgrades.attributes[i].level + " LVL     " + upgrades.attributes[i].cost + "GP", {font:"bold 15px sans-serif", fill:"yellow", align:"center"});
- 	      	upgradeNames[i].position.x = 760;
-        	upgradeNames[i].position.y = 58 * i + 65;
+ 	      	upgradeNames[i].position.x = 790;
+        	upgradeNames[i].position.y = 60 * i + 85;
 		stage.addChild(upgradeNames[i]);		
 	};
 	// List of each attribute's individual click function.
@@ -394,36 +394,21 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                 {"name":"Level_3", "type":"forest", "doors":3, "prev":"Level_2", "next":"Level_4"},
                 {"name":"Level_4", "type":"forest", "doors":5, "prev":"Level_3", "next":"Level_5"},
                 {"name":"Level_5", "type":"dungeon", "doors":4, "prev":"Level_4", "next":"Level_6"},
-                {"name":"Level_6", "type":"dungeon", "doors":5, "prev":"Level_5", "next":"Level_7"},
+                {"name":"Level_6", "type":"dungeon", "doors":5, "prev":"Level_5", next:"Level_7"},
                 {"name":"Level_7", "type":"dungeon", "doors":4, "prev":"Level_6", "next":"Level_8"},
                 {"name":"Level_8", "type":"dungeon", "doors":4, "prev":"Level_7", "next":"Level_9"},
-                {"name":"Level_9", "type":"dungeon", "doors":5, "prev":"Level_8", "next":"Level_10"},
+                {"name":"Level_9", "type":"dungeon", "doors":5, "prev":"Level_8", next:"Level_10"},
                 {"name":"Level_10", "type":"dungeon", "doors":4, "prev":"Level_9", "next":"Level_11"},
                 {"name":"Level_11", "type":"dungeon", "doors":4, "prev":"Level_10", "next":"Level_12"},
                 {"name":"Level_12", "type":"dungeon", "doors":4, "prev":"Level_11", "next":"Level_13"},
                 {"name":"Level_13", "type":"dungeon", "doors":4, "prev":"Level_12", "next":"Level_14"},
                 {"name":"Level_14", "type":"dungeon", "doors":4, "prev":"Level_13", "next":"Level_15"},
-                {"name":"Level_15", "type":"dungeon", "doors":5, "prev":"Level_14", "next":"Level_16"},
+                {"name":"Level_15", "type":"dungeon", "doors":5, "prev":"Level_14", next:"Level_16"},
                 {"name":"Level_16", "type":"dungeon", "doors":4, "prev":"Level_15", "next":"Level_17"},
                 {"name":"Level_17", "type":"dungeon", "doors":4, "prev":"Level_16", "next":"Level_18"},
                 {"name":"Level_18", "type":"dungeon", "doors":4, "prev":"Level_17", "next":"Level_19"},
                 {"name":"Level_19", "type":"dungeon", "doors":4, "prev":"Level_18", "next":"Level_20"},
-                {"name":"Level_20", "type":"dungeon", "doors":4, "prev":"Level_19", "next":"Level_21"},
-                {"name":"Level_21", "type":"dungeon", "doors":4, "prev":"Level_20", "next":"Level_22"},
-                {"name":"Level_22", "type":"dungeon", "doors":4, "prev":"Level_21", "next":"Level_23"},
-                {"name":"Level_23", "type":"dungeon", "doors":4, "prev":"Level_22", "next":"Level_24"},
-                {"name":"Level_24", "type":"dungeon", "doors":4, "prev":"Level_23", "next":"Level_25"},
-                {"name":"Level_25", "type":"dungeon", "doors":4, "prev":"Level_24", "next":"Level_26"},
-                {"name":"Level_26", "type":"dungeon", "doors":4, "prev":"Level_25", "next":"Level_27"},
-                {"name":"Level_27", "type":"dungeon", "doors":4, "prev":"Level_26", "next":"Level_28"},
-                {"name":"Level_28", "type":"dungeon", "doors":4, "prev":"Level_27", "next":"Level_29"},
-                {"name":"Level_29", "type":"dungeon", "doors":4, "prev":"Level_28", "next":"Level_30"},
-                {"name":"Level_30", "type":"dungeon", "doors":4, "prev":"Level_29", "next":"Level_31"},
-                {"name":"Level_31", "type":"dungeon", "doors":4, "prev":"Level_30", "next":"Level_32"},
-                {"name":"Level_32", "type":"dungeon", "doors":4, "prev":"Level_31", "next":"Level_33"},
-                {"name":"Level_33", "type":"dungeon", "doors":4, "prev":"Level_32", "next":"Level_34"},
-                {"name":"Level_34", "type":"dungeon", "doors":4, "prev":"Level_33", "next":"Level_35"},
-                {"name":"Level_35", "type":"dungeon", "doors":4, "prev":"Level_34", "next":"Level_36"}
+                {"name":"Level_20", "type":"dungeon", "doors":4, "prev":"Level_19", "next":"Level_NULL"},
         ];
 
 //
@@ -442,18 +427,19 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 	for(var i = 0; i < 5; i++){
 
 		chests[i] = new chest(INDEX, i);
-                chests[i].sprite.position.x = 650; //20 + (90 * i);
-                chests[i].sprite.position.y = 42 + (85 * i); //50;
+                chests[i].sprite.position.x = 670; //20 + (90 * i);
+                chests[i].sprite.position.y = 50 + (90 * i); //50;
 		stage.addChild(chests[i].sprite);
 	}
 
 	// Setup placement for next level button!
+	//var texture = PIXI.Texture.fromImage("Flameskull.png");
         var texture = PIXI.Texture.fromImage("res/sign.png");
         doorOut = new PIXI.Sprite(texture);
-        doorOut.position.x = 650;//(20 + 130 * i);
-        doorOut.position.y = 42 + (85 * i);
+        doorOut.position.x = 670;//(20 + 130 * i);
+        doorOut.position.y = 50 + (90 * i);
         //doorOut.scale.x = doorOut.scale.y = 8.1;
-	doorOut.scale.x = doorOut.scale.y = 5.2;
+	doorOut.scale.x = doorOut.scale.y = 6;
 
         //Tint starts on spawn to let you know you can't open this sign yet and load the next level.
         doorOut.interactive = false;
@@ -477,8 +463,8 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
         //var BG = PIXI.Texture.fromImage("res/" + currentArea.name + ".png");
 	var BG = PIXI.Texture.fromImage(currentArea.name + ".png");
         areaBackground = new PIXI.Sprite(BG);
-        areaBackground.position.x = 0;
-        areaBackground.position.y = 40;
+        areaBackground.position.x = 20;
+        areaBackground.position.y = 50;
         areaBackground.scale.y = 8.1;
         areaBackground.scale.x = 9.1;
         stage.addChild(areaBackground);
@@ -516,7 +502,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 
 	//Positions entire character container, healthbar and name and sprite.
 	char_container.position.x = 50; 
-	char_container.position.y = 290;
+	char_container.position.y = 300;
 	stage.addChild(char_container);
 
         // New monster stuff starts here
@@ -543,44 +529,6 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 	stage.addChild(monsters[0].monsterContainer);
 	stage.addChild(monsters[1].monsterContainer);
 	stage.addChild(monsters[2].monsterContainer);
-
-	// Setup weapon if already unlocked
-	if(ti >= 1){
-
-                    // Draw sword in player's hand.
-                    console.log("*Gives Sword*");
-                    texture = PIXI.Texture.fromImage("res/" + "sword_char.png");
-                    weapon_char = new PIXI.Sprite(texture);
-                    weapon_char.position.x = -12;
-                    weapon_char.position.y = 115;
-                    weapon_char.scale.x = weapon_char.scale.y = 6;
-                    char_container.addChild(weapon_char);
-
-                    // Draw sword on menu.
-                    //texture = PIXI.Texture.fromImage("res/" + "sword.png");
-                    //weapon = new PIXI.Sprite(texture);
-                    //weapon.position.x = 780;
-                    //weapon.position.y = 465;
-                    //weapon.scale.x = weapon.scale.y = 5.5;
-                    //stage.addChild(weapon);
-
-                    // Repair buttons
-                    //repair_button = new PIXI.Graphics();
-                    //repair_button.beginFill(0x757585);
-                    //repair_button.drawRect(775, 60 * 8 + 65, 258, 50);
-                    //repair_button.endFill();
-                    //Tint starts on spawn to let you know you can't open this door yet.
-                    //upgradeButtons[i].interactive = false;
-                    //upgradeButtons[i].buttonMode = false;
-                    //upgradeButtons[i].tint = 0x999966;
-                    //stage.addChild(repair_button);
-
-                    //repair_text = new PIXI.Text("Repair");
-                    //repair_text.position.x = 790;
-                    //repair_text.position.y = 60 * 8 + 85;
-                    //stage.addChild(repair_text);
-	}
-
 
 	// Basic update globals.
 	var currentHealth = 6;
@@ -610,11 +558,8 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 
 		// Cleanup for next level and reseting bool.
 		if(newLevel > 0){
-			// If you have met the dragon and taken his sword
-			if(INDEX == 32){
+			if(INDEX == 1){
 
-				//increase tier to 1
-				ti = 1;
 				// Draw sword in player's hand.
 				console.log("*Gives Sword*");
 			        texture = PIXI.Texture.fromImage("res/" + "sword_char.png");
@@ -625,28 +570,28 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
         			char_container.addChild(weapon_char);
 
 				// Draw sword on menu.
-                                //texture = PIXI.Texture.fromImage("res/" + "sword.png");
-                                //weapon = new PIXI.Sprite(texture);
-                                //weapon.position.x = 780;
-                                //weapon.position.y = 465;
-                                //weapon.scale.x = weapon.scale.y = 5.5;
-                                //stage.addChild(weapon);
+                                texture = PIXI.Texture.fromImage("res/" + "sword.png");
+                                weapon = new PIXI.Sprite(texture);
+                                weapon.position.x = 780;
+                                weapon.position.y = 465;
+                                weapon.scale.x = weapon.scale.y = 5.5;
+                                stage.addChild(weapon);
 
 		                // Repair buttons
-		                //repair_button = new PIXI.Graphics();
-                		//repair_button.beginFill(0x757585);
-                		//repair_button.drawRect(775, 60 * 8 + 65, 258, 50);
-                		//repair_button.endFill();
+		                repair_button = new PIXI.Graphics();
+                		repair_button.beginFill(0x757585);
+                		repair_button.drawRect(775, 60 * 8 + 65, 258, 50);
+                		repair_button.endFill();
                 		//Tint starts on spawn to let you know you can't open this door yet.
                 		//upgradeButtons[i].interactive = false;
                 		//upgradeButtons[i].buttonMode = false;
                 		//upgradeButtons[i].tint = 0x999966;
-        		        //stage.addChild(repair_button);
+        		        stage.addChild(repair_button);
 
-                		//repair_text = new PIXI.Text("Repair");
-        		        //repair_text.position.x = 790;
-        		        //repair_text.position.y = 60 * 8 + 85;
-		                //stage.addChild(repair_text);
+                		upgradeNames[i] = new PIXI.Text("Repair");
+        		        upgradeNames[i].position.x = 790;
+        		        upgradeNames[i].position.y = 60 * 8 + 85;
+		                stage.addChild(upgradeNames[i]);
 
 			}
 
@@ -688,7 +633,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 		//console.log(" sin:" + sin);
                 sin = sin + value;
                 TPSin.setText("" + sin + " SIN");
-                saveChar(n, r, ge, gold, sin, l, ti, at);
+                saveChar(n, r, ge, gold, sin, l, t, at);
         }
 
 
@@ -727,10 +672,10 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 			char_stamina++;
 
 			bar.beginFill(0x0099FF);
-			bar.drawRect(55,538,(char_stamina/100)*800,14);
+			bar.drawRect(55,548,(char_stamina/100)*800,14);
 		}else{
                         bar.beginFill(0x999966);
-			bar.drawRect(55,538,(char_stamina/100)*800,14);
+			bar.drawRect(55,548,(char_stamina/100)*800,14);
 
 			//console.log("	Crit hit!");
 			//console.log("	" + upgrades.attributes[0].level * 3);
@@ -837,8 +782,8 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
  	        for(var i = 0; i < 5; i++){
 
  	               chests[i] = new chest(INDEX, i);
-	               chests[i].sprite.position.x = 650; //20 + (90 * i);
-        	       chests[i].sprite.position.y = 42 + (85 * i); //50;
+	               chests[i].sprite.position.x = 670; //20 + (90 * i);
+        	       chests[i].sprite.position.y = 50 + (90 * i); //50;
  	               stage.addChild(chests[i].sprite);
  	        }
 		

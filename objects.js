@@ -26,7 +26,7 @@ function chest(level_num, chest_num){
 	this.type = "";
 
         this.sprite = new PIXI.Sprite.fromImage("res/chest_closed.png");
-        this.sprite.scale.x = this.sprite.scale.y = 6;
+        this.sprite.scale.x = this.sprite.scale.y = 5.2;
         this.sprite.position.x = 10;
         this.sprite.position.y = 10;
 
@@ -135,13 +135,13 @@ function Monsters(level_num){
 	this.monsterContainer.addChild(this.sprite);
 
 	// Setting up name text
-        this.name_text = new PIXI.Text(this.name, {font:"bold 25px sans-serif", fill:"pink", align:"center"});
+        this.name_text = new PIXI.Text(this.name, {font:"bold 21px sans-serif", fill:"pink", align:"center"});
         this.name_text.position.x = 190;
         this.name_text.position.y = 340;
         this.monsterContainer.addChild(this.name_text);
 
 	// New monster ratio bar.
-        this.health_text = new PIXI.Text(this.current_health +"/" + this.health, {font:"bold 21px sans-serif", fill:"#CC0000", align:"center"});
+        this.health_text = new PIXI.Text(this.current_health +"/" + this.health, {font:"bold 17px sans-serif", fill:"#CC0000", align:"center"});
         this.health_text.position.x = 220;
         this.health_text.position.y = 451;
         this.monsterContainer.addChild(this.health_text);
@@ -208,39 +208,69 @@ Monsters.prototype.generateMonster = function(level_num){
 
         this.array = [
 
-		// Lava Cave
+		//Cave
+                "Redslime",
+                "Redslime",
+		"Redslime",
+                "Redslime",
                 "Flamemoth",
                 "Flamemoth",
-		"Direrat",
-		"Direrat",
-		"Redslime",
-		"Redslime",
-		"Fluffpuff",
-
-		// Ancient Forest 
-                "Rindslug",
-		"Rindslug",
 		"Direrat",
                 "Direrat",
-		"Snake",
-		"Snake",
-		"Groaf",
-		"Greenslime",
-		"Piggy",
-		"Piggy",
+                "Direrat",
 
-		// Mysterious Forest
-		"Direrat",
-                "Greenslime",
-		"Fox",
-		"Fox",
-                "Greenslime",
-                "Groaf",
+		//Starting to get to Forest
+		"Piggy",
                 "Piggy",
+		"Greenslime",
+                "Shallot",
+                "Shallot",
+		"Leafae",
+
+		//Waterfall
+		"Snake",
+                "Snake",
+		"Shroomy",
+		"Greenslime",
+
+		"Pebble",
+		"Pebble",
+		//Riverside
 		"Groaf",
-		"Snake",
-		"Snake",
-                "Fluffpuff"
+		"Groaf",
+		
+		//Bridge
+		"Gaobo",
+		"Grot",
+		"Rindslug",
+
+		//Beach
+		"Fluffpuff",
+		"Fluffpuff",
+		"Dingo",
+		"Piggy",
+		
+		//Woods
+		"Stig",
+		"Direrat",
+		"Deku",
+		"Deku",
+		"Shada",
+		"Shada",
+
+		//Dungeon
+		"Oneye",
+		"Oneye",
+		"Bones",
+		"Fallen",
+		"Fallen",
+		"Bones",
+		"Direrat",
+
+		//Mountain
+		"Flameskull",
+		""
+
         ];
         var num = level_num + Math.floor((Math.random() * 10));
 	this.name = this.array[num];
