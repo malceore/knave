@@ -47,6 +47,10 @@ var TPText;
 var TPGold;
 var TPSin;
 var sin = 0;
+var buff_ren;
+var buff_poi;
+var buff_fre;
+
 
 // Calls all the initial methods needed to setup, load and play the game.
 function init(){
@@ -80,6 +84,26 @@ function load(json){
 		newChar = true;
 	}
 
+	var gameWidth = window.innerWidth;
+	var gameHeight = window.innerHeight;
+	var scaleToFitX = gameWidth / 1000;
+	var scaleToFitY = gameHeight / 500;
+	stage = new PIXI.Stage(0x50503E);
+	var canvas = document.getElementById("game");
+
+	// Scaling statement belongs to: https://www.davrous.com/2012/04/06/modernizing-your-html5-canvas-games-part-1-hardware-scaling-css3/
+	var optimalRatio = Math.min(scaleToFitX, scaleToFitY);
+	var currentScreenRatio = gameWidth / gameHeight;
+	if(currentScreenRatio >= 1.77 && currentScreenRatio <= 1.79) {
+		canvas.style.width = gameWidth + "px";
+		canvas.style.height = gameHeight + "px";
+	}else{
+		canvas.style.width = 1000 * optimalRatio + "px";
+		canvas.style.height = 500 * optimalRatio + "px";
+	}
+	renderer = PIXI.autoDetectRenderer(1024, 570, {view:document.getElementById("game")} );
+	canvas.focus();
+
 	// Gonna load those sprites as PIXI objects
         var loader = new PIXI.JsonLoader(json);
        	loader.on('loaded', function(evt) {
@@ -90,19 +114,19 @@ function load(json){
 		if(ready == 0 && newChar == false){
  
 			// This means we already have a char saved in cookies and we call setup with what we got from cookies.
-			console.log("Char loaded, callings setup!");
-		        stage = new PIXI.Stage(0x50503E);
-        		renderer = PIXI.autoDetectRenderer(1024, 570, {view:document.getElementById("game")} );
+			//console.log("Char loaded, callings setup!");
+		        //stage = new PIXI.Stage(0x50503E);
+        		//renderer = PIXI.autoDetectRenderer(1024, 570, {view:document.getElementById("game")} );
 
 			console.log("Calling setup!");
 			setup(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8], temp[9], temp[10], temp[11], temp[12]);
 		}else if(ready == 0 && newChar == true){
 
-		        stage = new PIXI.Stage(0x50503E);
-		        renderer = PIXI.autoDetectRenderer(1024, 570, {view:document.getElementById("game")} );
+		        //stage = new PIXI.Stage(0x50503E);
+		        //renderer = PIXI.autoDetectRenderer(1024, 570, {view:document.getElementById("game")} );
 
 			//document.body.game.appendChild(renderer.view);
-        		document.body.appendChild(renderer.view);
+        		//document.body.appendChild(renderer.view);
 
 			// Means this person has a character to create. 
 			console.log("Character creation hoe!");
@@ -556,14 +580,6 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                     weapon_char.scale.x = weapon_char.scale.y = 6;
                     char_container.addChild(weapon_char);
 
-                    // Draw sword on menu.
-                    //texture = PIXI.Texture.fromImage("res/" + "sword.png");
-                    //weapon = new PIXI.Sprite(texture);
-                    //weapon.position.x = 780;
-                    //weapon.position.y = 465;
-                    //weapon.scale.x = weapon.scale.y = 5.5;
-                    //stage.addChild(weapon);
-
                     // Repair buttons
                     //repair_button = new PIXI.Graphics();
                     //repair_button.beginFill(0x757585);
@@ -610,8 +626,9 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 
 		// Cleanup for next level and reseting bool.
 		if(newLevel > 0){
+
 			// If you have met the dragon and taken his sword
-			if(INDEX == 32){
+			if(INDEX == 1){
 
 				//increase tier to 1
 				ti = 1;
@@ -624,29 +641,38 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
         			weapon_char.scale.x = weapon_char.scale.y = 6;
         			char_container.addChild(weapon_char);
 
-				// Draw sword on menu.
-                                //texture = PIXI.Texture.fromImage("res/" + "sword.png");
-                                //weapon = new PIXI.Sprite(texture);
-                                //weapon.position.x = 780;
-                                //weapon.position.y = 465;
-                                //weapon.scale.x = weapon.scale.y = 5.5;
-                                //stage.addChild(weapon);
+                                texture = PIXI.Texture.fromImage("res/" + "renewal.png");
+                                buff_fre = new PIXI.Sprite(texture);
+                                buff_fre.position.x = 745;
+                                buff_fre.position.y = 435;
+                                buff_fre.scale.x = buff_fre.scale.y = 5.2;
+                                buff_fre.interactive = true;
+                                buff_fre.buttonMode = true;
+                                stage.addChild(buff_fre);
 
-		                // Repair buttons
-		                //repair_button = new PIXI.Graphics();
-                		//repair_button.beginFill(0x757585);
-                		//repair_button.drawRect(775, 60 * 8 + 65, 258, 50);
-                		//repair_button.endFill();
-                		//Tint starts on spawn to let you know you can't open this door yet.
-                		//upgradeButtons[i].interactive = false;
-                		//upgradeButtons[i].buttonMode = false;
+                                texture = PIXI.Texture.fromImage("res/" + "poison.png");
+                                buff_poi = new PIXI.Sprite(texture);
+                                buff_poi.position.x = 840;
+                                buff_poi.position.y = 435;
+                                buff_poi.scale.x = buff_poi.scale.y = 5.2;
+                                buff_poi.interactive = true;
+                                buff_poi.buttonMode = true;
+                                stage.addChild(buff_poi);
+
+                                texture = PIXI.Texture.fromImage("res/" + "frenzy.png");
+                                buff_ren = new PIXI.Sprite(texture);
+                                buff_ren.position.x = 930;
+                                buff_ren.position.y = 440;
+                                buff_ren.scale.x = buff_ren.scale.y = 5.2;
+				buff_ren.interactive = true;
+				buff_ren.buttonMode = true;
+                                stage.addChild(buff_ren);
+
                 		//upgradeButtons[i].tint = 0x999966;
-        		        //stage.addChild(repair_button);
-
-                		//repair_text = new PIXI.Text("Repair");
-        		        //repair_text.position.x = 790;
-        		        //repair_text.position.y = 60 * 8 + 85;
-		                //stage.addChild(repair_text);
+                		var buff_text = new PIXI.Text("Buffs");
+        		        buff_text.position.x = 750;
+        		        buff_text.position.y = 400;
+		                stage.addChild(buff_text);
 
 			}
 
