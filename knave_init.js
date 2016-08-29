@@ -21,6 +21,7 @@
 //GLOBAL VARS, sometime gonna make them all capitalized!
 var stage;
 var renderer;
+var res;
 var areaBackground;
 var map;
 var doors;
@@ -31,7 +32,6 @@ var damage = 1;
 var upgrades;
 var kills = 0;
 var gold = 0;
-var ready = 0; // Acts as a Semaphore to the loaded jsons
 var char_stamina;
 var char;
 var monster;
@@ -57,23 +57,58 @@ var hover_text;
 function init(){
 
 	// This needs to be before any PIXI code. Stops Antialiasis
-        PIXI.scaleModes.DEFAULT = PIXI.scaleModes.NEAREST;
+        PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
 
 	// JSON files for sprites must be loaded ahead of time, but PIXI loads them async.
 	//	So we have to use a semaphore, 'ready' to stop race conditions.
-	console.log("Calling loads!");
-	load("monsters_1.json"); //Has too be called separately on all JSONs
-	load("monsters_2.json");
-	load("backgrounds.json");
-	load("races.json");
+	console.log("Calling loader!");
+	var loader = new PIXI.loaders.Loader();
+
+	loader.add("monsters_1","monsters_1.json"); //Has too be called separately on all JSONs
+	loader.add("monsters_2", "monsters_2.json");
+	loader.add("backgrounds", "backgrounds.json");
+	loader.add("races","races.json");
+
+	loader.load(build);
+
+        //loader.once('loaded', on);
 }
 
 
 
-// This load function will load any and all files necessary before the game can run, such as bulk sprites and saved data.
-function load(json){
+/* This load function will load any and all files necessary before the game can run, such as bulk sprites and saved data.
+function load(name, json){
 
 	ready--;
+	//console.log(" " + ready);
+        var loader = PIXI.loader;
+	loader.add(name, json)
+	loader.on('load', function() {
+	var loader = new PIXI.loaders.Loader();
+	//loader.concurrency = 4;
+
+	loader.add(name, json);
+	loader.load();
+	loader.check = new function() {
+                ready++;
+                //evt.content.json
+                console.log(name+" loaded successfully! " +ready);
+                if(ready == 0){
+                        build();
+                }
+        };
+
+	loader.once('loaded', loader.check);
+        //loader.load(function(loader, name){});
+}*/
+
+
+function build(loader, resources){
+
+	res = resources;
+
+	console.log("Building Canvas.");
+
 	// Will let us know if we need to create a character before playing.
 	var newChar = false;
 	// Sets up character object.
@@ -89,7 +124,9 @@ function load(json){
 	var gameHeight = window.innerHeight;
 	var scaleToFitX = gameWidth / 1000;
 	var scaleToFitY = gameHeight / 500;
-	stage = new PIXI.Stage(0x50503E);
+	stage = new PIXI.Container();
+	//stage.backgroundColor = 0x50503E;
+	//stage = new PIXI.Stage(0x50503E);
 	var canvas = document.getElementById("game");
 
 	// Scaling statement belongs to: https://www.davrous.com/2012/04/06/modernizing-your-html5-canvas-games-part-1-hardware-scaling-css3/
@@ -103,38 +140,14 @@ function load(json){
 		canvas.style.height = 500 * optimalRatio + "px";
 	}
 	renderer = PIXI.autoDetectRenderer(1024, 570, {view:document.getElementById("game")} );
+	renderer.backgroundColor = 0x50503E;
 	canvas.focus();
 
-	// Gonna load those sprites as PIXI objects
-        var loader = new PIXI.JsonLoader(json);
-       	loader.on('loaded', function(evt) {
-
-		ready++;
-               	evt.content.json
-               	console.log("Load Successful!");
-		if(ready == 0 && newChar == false){
- 
-			// This means we already have a char saved in cookies and we call setup with what we got from cookies.
-			//console.log("Char loaded, callings setup!");
-		        //stage = new PIXI.Stage(0x50503E);
-        		//renderer = PIXI.autoDetectRenderer(1024, 570, {view:document.getElementById("game")} );
-
-			console.log("Calling setup!");
-			setup(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8], temp[9], temp[10], temp[11], temp[12]);
-		}else if(ready == 0 && newChar == true){
-
-		        //stage = new PIXI.Stage(0x50503E);
-		        //renderer = PIXI.autoDetectRenderer(1024, 570, {view:document.getElementById("game")} );
-
-			//document.body.game.appendChild(renderer.view);
-        		//document.body.appendChild(renderer.view);
-
-			// Means this person has a character to create. 
-			console.log("Character creation hoe!");
-			createChar();
-		}
-       	});
-       	loader.load();
+	if(newChar){
+                createChar();
+	}else{
+	        setup(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8], temp[9], temp[10], temp[11], temp[12]);
+	}
 }
 
 
@@ -146,7 +159,8 @@ function createChar(){
 			// n, r, ge, go, si, l, t, ats 
 
 	// The placeholder image that  
-	var tempTex = PIXI.Texture.fromImage("Human1_M.png");
+	//var tempTex = PIXI.Texture.fromImage("Human1_M.png");
+	var tempTex = PIXI.Texture.fromImage('Human1_M'+'.png');
         var tempSprite = new PIXI.Sprite(tempTex);
         tempSprite.position.x = 540;
         tempSprite.position.y = 180;
