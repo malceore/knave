@@ -50,7 +50,8 @@ var sin = 0;
 var buff_ren;
 var buff_poi;
 var buff_fre;
-
+var hover_hints;
+var hover_text;
 
 // Calls all the initial methods needed to setup, load and play the game.
 function init(){
@@ -311,20 +312,28 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 	stage.addChild(TPBar);
 
 	// Top bar gold words.
-	TPGold = new PIXI.Text("0 GP", {font:"35px Arial", fill:"yellow"});
+	TPGold = new PIXI.Text("0 GP", {font:"bold 35px sans-serif", fill:"yellow"});
 	TPGold.position.x = 100;
-	TPGold.position.y = 12;
+	TPGold.position.y = 10;
 	stage.addChild(TPGold);
 
 	// Top bar descriptions for loot and upgrade
-        TPText = new PIXI.Text("Loot Chests          Upgrades", {font:"25px Arial", fill:"black"});
-        TPText.position.x = 650;
-        TPText.position.y = 20;
+        TPText = new PIXI.Text("Loot Chests       Upgrades", {font:"bold 25px sans-serif", fill:"light grey"});
+	TPText.buttonMode = true;
+	TPText.interactive = true;
+        TPText.position.x = 625;
+        TPText.position.y = 15;
         stage.addChild(TPText);
-
-	TPSin = new PIXI.Text("0 SIN", {font:"35px Arial", fill:"white"});
-        TPSin.position.x = 400;
-        TPSin.position.y = 12;
+        TPText.mouseover = function(mouseData){
+                hover_text.setText("Loot Chests are unlocked as you kill monsters.");
+        };
+        TPText.mouseout = function(mouseData){
+                hover_text.setText("");
+        };
+	
+	TPSin = new PIXI.Text("0 SIN", {font:"bold 35px sans-serif", fill:"white"});
+        TPSin.position.x = 380;
+        TPSin.position.y = 10;
         stage.addChild(TPSin);
 
 	// Setting up upgrades, this means printing out each attribute button.
@@ -366,6 +375,13 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 		upgrades.attributes[0].level += 1;
 		upgradeNames[0].setText(upgrades.attributes[0].name + "     " + upgrades.attributes[0].level + " LVL     " + upgrades.attributes[0].cost + "GP");
 	};
+	upgradeButtons[0].mouseover = function(mouseData){
+                hover_text.setText("Brutality, your critical attack damage. Currently:" );
+	};
+	upgradeButtons[0].mouseout = function(mouseData){
+		hover_text.setText("");
+	};
+
         upgradeButtons[1].click = upgradeButtons[1].touchstart = function(e){
 
                 addGold(-1 * upgrades.attributes[1].cost);
@@ -373,6 +389,14 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                 upgrades.attributes[1].level += 1;
                 upgradeNames[1].setText(upgrades.attributes[1].name + "     " + upgrades.attributes[1].level + " LVL     " + upgrades.attributes[1].cost + "GP");
         };
+        upgradeButtons[1].mouseover = function(mouseData){
+                hover_text.setText("Ferocity is your click damage. Currently:" );
+        };
+        upgradeButtons[1].mouseout = function(mouseData){
+                hover_text.setText("");
+        };
+
+
         upgradeButtons[2].click = upgradeButtons[2].touchstart = function(e){
 
                 addGold(-1 * upgrades.attributes[2].cost);
@@ -380,6 +404,13 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                 upgrades.attributes[2].level += 1;
                 upgradeNames[2].setText(upgrades.attributes[2].name + "     " + upgrades.attributes[2].level + " LVL     " + upgrades.attributes[2].cost + "GP");
         };
+        upgradeButtons[2].mouseover = function(mouseData){
+                hover_text.setText("Cruelty is your SIN generated per kill. Currently:");
+        };
+        upgradeButtons[2].mouseout = function(mouseData){
+                hover_text.setText("");
+        };
+
         upgradeButtons[3].click = upgradeButtons[3].touchstart = function(e){
 
                 addGold(-1 * upgrades.attributes[3].cost);
@@ -387,6 +418,13 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                 upgrades.attributes[3].level += 1;
                 upgradeNames[3].setText(upgrades.attributes[3].name + "     " + upgrades.attributes[3].level + " LVL     " + upgrades.attributes[3].cost + "GP");
         };
+        upgradeButtons[3].mouseover = function(mouseData){
+                hover_text.setText("Willpower, decreases the critical bar refill time.");
+        };
+        upgradeButtons[3].mouseout = function(mouseData){
+                hover_text.setText("");
+        };
+
         upgradeButtons[4].click = upgradeButtons[4].touchstart = function(e){
 
                 addGold(-1 * upgrades.attributes[4].cost);
@@ -394,6 +432,13 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                 upgrades.attributes[4].level += 1;
                 upgradeNames[4].setText(upgrades.attributes[4].name + "       " + upgrades.attributes[4].level + " LVL     " + upgrades.attributes[4].cost + "GP" );
         };
+        upgradeButtons[4].mouseover = function(mouseData){
+                hover_text.setText("Guile, the amount of gold generated per kill. Currently:");
+        };
+        upgradeButtons[4].mouseout = function(mouseData){
+                hover_text.setText("");
+        };
+
         upgradeButtons[5].click = upgradeButtons[5].touchstart = function(e){
 
                 addGold(-1 * upgrades.attributes[5].cost);
@@ -401,7 +446,12 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                 upgrades.attributes[5].level += 1;
                 upgradeNames[5].setText(upgrades.attributes[5].name + "       " + upgrades.attributes[5].level + " LVL     " + upgrades.attributes[5].cost + "GP");
         };
-
+        upgradeButtons[5].mouseover = function(mouseData){
+                hover_text.setText("Attunement, currently does nothing.");
+        };
+        upgradeButtons[5].mouseout = function(mouseData){
+                hover_text.setText("");
+        };
 
 //TEMP 
 	/* Instead I'm just gonna leave the area descriptors inside the file for ease right now.
@@ -612,9 +662,26 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 	//setInterval(function() { bars() }, 2000)
 	bars(2003 - (upgrades.attributes[3].level * 3));
 
+	// This is a helpful hints bar, it will display a gameplay explanation of what the mouse is placed over.
+	hover_hint = new PIXI.Graphics();
+        hover_hint.beginFill(0x757585);
+        hover_hint.drawRect(0, 0, 380, 30);
+        hover_hint.position.y = 540;
+        hover_hint.position.x = 650;
+        hover_hint.endFill();
+
+	// The text of teh hover_hint, will be changed on hover over of buttons.
+        hover_text = new PIXI.Text("Hover over things and explanations will appear here.", {font:"18px Arial", fill:"black"});
+        hover_text.position.x = 3;
+        hover_text.position.y = 8;
+        hover_hint.addChild(hover_text);
+
+	stage.addChild(hover_hint);
+
+
 	// Kick the tires and lite the fires. 1000 = a second and 30 = frames per.
-	//update();
-	setInterval(update(), 1000/30);
+	update();
+	//setInterval(update(), 1000/30);
 
 	// Main Game loop.
 	function update(){
@@ -627,7 +694,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 		// Cleanup for next level and reseting bool.
 		if(newLevel > 0){
 
-			// If you have met the dragon and taken his sword
+			/* If you have met the dragon and taken his sword
 			if(INDEX == 1){
 
 				//increase tier to 1
@@ -674,7 +741,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
         		        buff_text.position.y = 400;
 		                stage.addChild(buff_text);
 
-			}
+			}*/
 
 			//stage.removeChild(chests[0].sprite);
 			//stage.removeChild(chests[1].sprite);
