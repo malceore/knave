@@ -52,6 +52,7 @@ var buff_poi;
 var buff_fre;
 var hover_hints;
 var hover_text;
+var crit_text;
 
 // Calls all the initial methods needed to setup, load and play the game.
 function init(){
@@ -186,7 +187,7 @@ function createChar(){
 	
 		array[0] = prompt("Choose a name.", "Keith");
 		//console.log(array[0]);
-		nameText.setText(array[0]);
+		nameText.text(array[0]);
                 renderer.render(stage);
 	}
 
@@ -210,15 +211,15 @@ function createChar(){
 
 		if(array[2] == "M"){
 
-			genderText.setText("Female"); 
+			genderText.text = "Female"; 
 			array[2] = "F";
-	                tempSprite.setTexture(PIXI.Texture.fromImage(array[1] + "_" + array[2] + ".png"));
+	                tempSprite.texture = PIXI.Texture.fromImage(array[1] + "_" + array[2] + ".png");
 			//console.log(array[1] + " " + array[2]);
 		}else{
 
-			genderText.setText("Male");
+			genderText.text = "Male";
 			array[2] = "M";
-	                tempSprite.setTexture(PIXI.Texture.fromImage(array[1] + "_" + array[2] + ".png"));
+	                tempSprite.texture = PIXI.Texture.fromImage(array[1] + "_" + array[2] + ".png");
 			//console.log(array[1] + " " + array[2]);
 		}
 	        renderer.render(stage);
@@ -253,8 +254,8 @@ function createChar(){
 			temp++;
 		}
 		array[1] = races[temp]; 
-		raceText.setText(races[temp]);
-		tempSprite.setTexture(PIXI.Texture.fromImage(array[1] + "_" + array[2] + ".png"));
+		raceText.text = races[temp];
+		tempSprite.texture = PIXI.Texture.fromImage(array[1] + "_" + array[2] + ".png");
 		//console.log("" + array[1] + "_" + array[2] + ".png");
 	        renderer.render(stage);
         };
@@ -327,27 +328,27 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 
 	// Top bar gold words.
 	TPGold = new PIXI.Text("0 GP", {font:"bold 35px sans-serif", fill:"yellow"});
-	TPGold.position.x = 100;
-	TPGold.position.y = 10;
+	TPGold.position.x = 80;
+	TPGold.position.y = 0;
 	stage.addChild(TPGold);
 
 	// Top bar descriptions for loot and upgrade
         TPText = new PIXI.Text("Loot Chests       Upgrades", {font:"bold 25px sans-serif", fill:"light grey"});
 	TPText.buttonMode = true;
 	TPText.interactive = true;
-        TPText.position.x = 625;
-        TPText.position.y = 15;
+        TPText.position.x = 620;
+        TPText.position.y = 10;
         stage.addChild(TPText);
         TPText.mouseover = function(mouseData){
-                hover_text.setText("Loot Chests are unlocked as you kill monsters.");
+                hover_text.text ="Loot Chests are unlocked as you kill monsters.";
         };
         TPText.mouseout = function(mouseData){
-                hover_text.setText("");
+                hover_text.text = "";
         };
 	
 	TPSin = new PIXI.Text("0 SIN", {font:"bold 35px sans-serif", fill:"white"});
-        TPSin.position.x = 380;
-        TPSin.position.y = 10;
+        TPSin.position.x = 360;
+        TPSin.position.y = 0;
         stage.addChild(TPSin);
 
 	// Setting up upgrades, this means printing out each attribute button.
@@ -387,13 +388,13 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 		addGold(-1 * upgrades.attributes[0].cost);
 		upgrades.attributes[0].cost = Math.round(upgrades.attributes[0].cost * 1.15) + 1;
 		upgrades.attributes[0].level += 1;
-		upgradeNames[0].setText(upgrades.attributes[0].name + "     " + upgrades.attributes[0].level + " LVL     " + upgrades.attributes[0].cost + "GP");
+		upgradeNames[0].text = upgrades.attributes[0].name + "     " + upgrades.attributes[0].level + " LVL     " + upgrades.attributes[0].cost + "GP";
 	};
 	upgradeButtons[0].mouseover = function(mouseData){
-                hover_text.setText("Brutality, your critical attack damage. Currently:" );
+                hover_text.text = "Brutality, your critical attack damage. Currently:";
 	};
 	upgradeButtons[0].mouseout = function(mouseData){
-		hover_text.setText("");
+		hover_text.text = "";
 	};
 
         upgradeButtons[1].click = upgradeButtons[1].touchstart = function(e){
@@ -401,13 +402,13 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                 addGold(-1 * upgrades.attributes[1].cost);
                 upgrades.attributes[1].cost = Math.round(upgrades.attributes[1].cost * 1.15) + 1;
                 upgrades.attributes[1].level += 1;
-                upgradeNames[1].setText(upgrades.attributes[1].name + "     " + upgrades.attributes[1].level + " LVL     " + upgrades.attributes[1].cost + "GP");
+                upgradeNames[1].text = upgrades.attributes[1].name + "     " + upgrades.attributes[1].level + " LVL     " + upgrades.attributes[1].cost + "GP";
         };
         upgradeButtons[1].mouseover = function(mouseData){
-                hover_text.setText("Ferocity is your click damage. Currently:" );
+                hover_text.text = "Ferocity is your click damage. Currently:" ;
         };
         upgradeButtons[1].mouseout = function(mouseData){
-                hover_text.setText("");
+                hover_text.text = "";
         };
 
 
@@ -416,13 +417,13 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                 addGold(-1 * upgrades.attributes[2].cost);
                 upgrades.attributes[2].cost = Math.round(upgrades.attributes[2].cost * 1.15) + 1;
                 upgrades.attributes[2].level += 1;
-                upgradeNames[2].setText(upgrades.attributes[2].name + "     " + upgrades.attributes[2].level + " LVL     " + upgrades.attributes[2].cost + "GP");
+                upgradeNames[2].text = upgrades.attributes[2].name + "     " + upgrades.attributes[2].level + " LVL     " + upgrades.attributes[2].cost + "GP";
         };
         upgradeButtons[2].mouseover = function(mouseData){
-                hover_text.setText("Cruelty is your SIN generated per kill. Currently:");
+                hover_text.text = "Cruelty is your SIN generated per kill. Currently:";
         };
         upgradeButtons[2].mouseout = function(mouseData){
-                hover_text.setText("");
+                hover_text.text = "";
         };
 
         upgradeButtons[3].click = upgradeButtons[3].touchstart = function(e){
@@ -430,13 +431,13 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                 addGold(-1 * upgrades.attributes[3].cost);
                 upgrades.attributes[3].cost = Math.round(upgrades.attributes[3].cost * 1.15) + 1;
                 upgrades.attributes[3].level += 1;
-                upgradeNames[3].setText(upgrades.attributes[3].name + "     " + upgrades.attributes[3].level + " LVL     " + upgrades.attributes[3].cost + "GP");
+                upgradeNames[3].text = upgrades.attributes[3].name + "     " + upgrades.attributes[3].level + " LVL     " + upgrades.attributes[3].cost + "GP";
         };
         upgradeButtons[3].mouseover = function(mouseData){
-                hover_text.setText("Willpower, decreases the critical bar refill time.");
+                hover_text.text = "Willpower, decreases the critical bar refill time.";
         };
         upgradeButtons[3].mouseout = function(mouseData){
-                hover_text.setText("");
+                hover_text.text = "";
         };
 
         upgradeButtons[4].click = upgradeButtons[4].touchstart = function(e){
@@ -444,13 +445,13 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                 addGold(-1 * upgrades.attributes[4].cost);
                 upgrades.attributes[4].cost = Math.round(upgrades.attributes[4].cost * 1.15) + 1;
                 upgrades.attributes[4].level += 1;
-                upgradeNames[4].setText(upgrades.attributes[4].name + "       " + upgrades.attributes[4].level + " LVL     " + upgrades.attributes[4].cost + "GP" );
+                upgradeNames[4].text = upgrades.attributes[4].name + "       " + upgrades.attributes[4].level + " LVL     " + upgrades.attributes[4].cost + "GP" ;
         };
         upgradeButtons[4].mouseover = function(mouseData){
-                hover_text.setText("Guile, the amount of gold generated per kill. Currently:");
+                hover_text.text = "Guile, the amount of gold generated per kill. Currently:";
         };
         upgradeButtons[4].mouseout = function(mouseData){
-                hover_text.setText("");
+                hover_text.text = "";
         };
 
         upgradeButtons[5].click = upgradeButtons[5].touchstart = function(e){
@@ -458,13 +459,13 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                 addGold(-1 * upgrades.attributes[5].cost);
                 upgrades.attributes[5].cost = Math.round(upgrades.attributes[5].cost * 1.15) + 1;
                 upgrades.attributes[5].level += 1;
-                upgradeNames[5].setText(upgrades.attributes[5].name + "       " + upgrades.attributes[5].level + " LVL     " + upgrades.attributes[5].cost + "GP");
+                upgradeNames[5].text = upgrades.attributes[5].name + "       " + upgrades.attributes[5].level + " LVL     " + upgrades.attributes[5].cost + "GP";
         };
         upgradeButtons[5].mouseover = function(mouseData){
-                hover_text.setText("Attunement, currently does nothing.");
+                hover_text.text = "Attunement, currently does nothing.";
         };
         upgradeButtons[5].mouseout = function(mouseData){
-                hover_text.setText("");
+                hover_text.text = "";
         };
 
 //TEMP 
@@ -531,7 +532,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 
 		chests[i] = new chest(INDEX, i);
                 chests[i].sprite.position.x = 650; //20 + (90 * i);
-                chests[i].sprite.position.y = 42 + (85 * i); //50;
+                chests[i].sprite.position.y = 42 + (80 * i); //50;
 		stage.addChild(chests[i].sprite);
 	}
 
@@ -539,9 +540,9 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
         var texture = PIXI.Texture.fromImage("res/sign.png");
         doorOut = new PIXI.Sprite(texture);
         doorOut.position.x = 650;//(20 + 130 * i);
-        doorOut.position.y = 42 + (85 * i);
+        doorOut.position.y = 42 + (80 * i);
         //doorOut.scale.x = doorOut.scale.y = 8.1;
-	doorOut.scale.x = doorOut.scale.y = 5.2;
+	doorOut.scale.x = doorOut.scale.y = 5;
 
         //Tint starts on spawn to let you know you can't open this sign yet and load the next level.
         doorOut.interactive = false;
@@ -572,7 +573,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
         stage.addChild(areaBackground);
 
 	// Now Placing everything into a neat little container!
-        char_container = new PIXI.DisplayObjectContainer();
+        char_container = new PIXI.Container();
 
         // Here is where the player Character's sprites and bars are setup.
 	texture = PIXI.Texture.fromImage(r + "_" + ge + ".png");
@@ -597,7 +598,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
         critical_bar.drawRect(5,248,(10/100)*800,14)
         char_container.addChild(critical_bar);
 
-        var char_name = new PIXI.Text(n, {font:"bold 25px sans-serif", fill:"pink", align:"center"});
+        var char_name = new PIXI.Text(n, {font:"bold 25px sans-serif", fill:"#ffffcc", align:"center"});
         char_name.position.x = 5;
         char_name.position.y = 0;
         char_container.addChild(char_name);
@@ -632,6 +633,8 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 	stage.addChild(monsters[1].monsterContainer);
 	stage.addChild(monsters[2].monsterContainer);
 
+
+        // WAITING TIL LATER TO IMPLEMENT THIS AGAIN.
 	// Setup weapon if already unlocked
 	if(ti >= 1){
 
@@ -692,6 +695,19 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 
 	stage.addChild(hover_hint);
 
+        //Text that popups/changes visibility when your character achieves a critical hit.
+        crit_text = new PIXI.Text("Critical Hit!");
+        crit_text.style = {
+                font:"bold 40px sans-serif", 
+                fill:"#ffffcc",
+                dropShadowColor : '#000000',
+                dropShadowAngle : Math.PI / 6,
+                dropShadowDistance : 6
+        };
+        crit_text.position.x = 100;
+        crit_text.position.y = 200;
+        crit_text.visible = false;
+        stage.addChild(crit_text);
 
 	// Kick the tires and lite the fires. 1000 = a second and 30 = frames per.
 	update();
@@ -705,7 +721,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 		checkMonsters();
 		checkChests();
 
-		// Cleanup for next level and reseting bool.
+		// Cleanup for next level and reseting bool. Semaphore.
 		if(newLevel > 0){
 
 			/* If you have met the dragon and taken his sword
@@ -762,7 +778,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 			//stage.removeChild(chests[2].sprite);
 			//stage.removeChild(chests[3].sprite);
 
-			stage.removeChild(monsters[0].monsterContainer);
+			/*stage.removeChild(monsters[0].monsterContainer);
                         stage.addChild(monsters[0].monsterContainer);
 
                         stage.removeChild(monsters[1].monsterContainer);
@@ -772,11 +788,12 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                         stage.addChild(monsters[2].monsterContainer);
 
 			stage.removeChild(char_container);
-			stage.addChild(char_container);
+			stage.addChild(char_container);*/
+                        console.log("Do I neeed this even?");
 			newLevel--;
 		}
 		renderer.render(stage);
-		requestAnimFrame(update);
+		requestAnimationFrame(update);
 	}
 
 
@@ -784,7 +801,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 	function addGold(value){
 
 		gold = gold + value;
-		TPGold.setText("" + gold + " GP");
+		TPGold.text = "" + gold + " GP";
 		//saveChar(n, r, ge, gold, sin, l, t, at);
 		checkAttributes();
 		//checkChests();
@@ -794,7 +811,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 
 		//console.log(" sin:" + sin);
                 sin = sin + value;
-                TPSin.setText("" + sin + " SIN");
+                TPSin.text = "" + sin + " SIN";
                 saveChar(n, r, ge, gold, sin, l, ti, at);
         }
 
@@ -813,16 +830,15 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                 	+ upgrades.attributes[0].level + ""
 		);*/
 
-	        document.cookie = na + ',' + re + ',' + gen + ',' + gold + "," + sin + ',' + INDEX + ',' + ti + ',' 
+        	        document.cookie = na + ',' + re + ',' + gen + ',' + gold + "," + sin + ',' + INDEX + ',' + ti + ',' 
 			+ upgrades.attributes[5].level + ","  
 	                + upgrades.attributes[4].level + ","
 	                + upgrades.attributes[3].level + ","
 	                + upgrades.attributes[2].level + ","
         	        + upgrades.attributes[1].level + ","
                 	+ upgrades.attributes[0].level + ""	
-		+ ";expires=Thu, 01 Jan 2020 00:00:00 UTC";
+	               	+ ";expires=Thu, 01 Jan 2020 00:00:00 UTC";
 	}
-
 
 
 	// This function controls the stamina bars regen and roll over
@@ -841,9 +857,13 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 
 			//console.log("	Crit hit!");
 			//console.log("	" + upgrades.attributes[0].level * 3);
-			monsters[0].current_health = monsters[0].current_health - (upgrades.attributes[0].level * 3);
-			char_stamina = 0;
-		}
+                        //monsters[0].sprite.click();
+                        //monsters[0].sprite.click();
+			//monsters[0].current_health = monsters[0].current_health - (upgrades.attributes[0].level * 2);
+			//char_stamina = 0;
+                      critical(false); // Bool is needed to remove the words after the thread calls back itself using timeout.
+		      setTimeout(function(){critical(true)}, value);
+                }
 		stage.addChild(bar);
 
 		//console.log("	waiting in bar for " + value);
@@ -851,6 +871,26 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 		setTimeout(function(){ bars(2000 - (upgrades.attributes[3].level * 3)) }, value)
 	};
 
+
+        //Needed to display a vivid indication text that your character has used it's critical attack.
+        function critical(stop){
+                if(stop){
+
+                        crit_text.visible = false;
+                        //crit_text.alpha = 0;
+                        //console.log("End crit " + crit_text.alpha);
+                }else{
+
+                        //Start
+                        monsters[0].sprite.click();
+                        //monsters[0].sprite.click();
+                        //monsters[0].current_health = monsters[0].current_health - (upgrades.attributes[0].level * 2);
+                        char_stamina = 0;
+                        crit_text.visible = true;
+                        //crit_text.alpha = 1;
+                        //console.log("Start crit " + crit_text.alpha);
+                }
+        };
 
 
 	// Makes sure that you can buy what you buy, and nothing else.
@@ -945,13 +985,14 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
 
  	               chests[i] = new chest(INDEX, i);
 	               chests[i].sprite.position.x = 650; //20 + (90 * i);
-        	       chests[i].sprite.position.y = 42 + (85 * i); //50;
+        	       chests[i].sprite.position.y = 42 + (80 * i); //50;
  	               stage.addChild(chests[i].sprite);
  	        }
 		
 		// Next we get to change the background
         	//var BG = PIXI.Texture.fromImage("res/" + currentArea.name + ".png");
-		areaBackground.setTexture(BG);
-		//stage.addChild(areaBackground);
+		//areaBackground.setTexture(BG);
+		areaBackground.texture = BG;
+                //stage.addChild(areaBackground);
 	};
 }
