@@ -187,7 +187,7 @@ function createChar(){
 	
 		array[0] = prompt("Choose a name.", "Keith");
 		//console.log(array[0]);
-		nameText.text(array[0]);
+		nameText.text = array[0];
                 renderer.render(stage);
 	}
 
@@ -293,13 +293,13 @@ function createChar(){
 
 	// Print out title and race descriptions.
 	var titleText = new PIXI.Text("Welcome to Knave ");
-	titleText.setStyle({font:"bold 60px Arial", fill:"yellow"});
+	titleText.style = {font:"bold 60px Arial", fill:"yellow"};
         titleText.position.x = 40;
         titleText.position.y = 50;
 	stage.addChild(titleText);
 
 	var tutorialText = new PIXI.Text("Click or Tap to attack monsters,\n then on chests to collect even\n more gold and finally spend\n your gold on upgrading your\n attributes. The arrow sign will\n take you to the next level\n when you are ready.");
-        tutorialText.setStyle({font:"bold 32px Arial", fill:"black"});
+        tutorialText.style = {font:"bold 32px Arial", fill:"black"};
         tutorialText.position.x = 40;
         tutorialText.position.y = 120;
 	stage.addChild(tutorialText);
@@ -611,9 +611,9 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
         // New monster stuff starts here
         var monsters = [ 
 
-			new Monsters(INDEX),
-			new Monsters(INDEX),
-			new Monsters(INDEX)	
+		new Monsters(INDEX),
+		new Monsters(INDEX),
+		new Monsters(INDEX)	
 	];
 
 	// Positioning monsters so not to overlap.
@@ -884,7 +884,7 @@ function setup(n, r, ge, go, si, l, ti, at0, at1, at2, at3, at4, at5){
                         //Start
                         monsters[0].sprite.click();
                         //monsters[0].sprite.click();
-                        //monsters[0].current_health = monsters[0].current_health - (upgrades.attributes[0].level * 2);
+                        monsters[0].current_health = monsters[0].current_health - (upgrades.attributes[0].level * 2);
                         char_stamina = 0;
                         crit_text.visible = true;
                         //crit_text.alpha = 1;
